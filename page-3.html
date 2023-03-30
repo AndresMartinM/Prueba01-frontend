@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>TERCERO</title>
+        <meta name="description" content="Evaluación de cierre de la Unidad I: Bocetos de introducción a la programación" />
+    </head>
+    <body onload="start()">
+        <nav>
+            <a href="index.html"><span class="miNombre"></span></a>
+            <a href="page-1.html">Primero</a>
+            <a href="page-2.html">Segundo</a>
+            <a href="page-3.html">Tercero</a>
+            <a href="page-4.html">Cuarto</a>
+        </nav>
+        <main></main>
+        <script>
+            let img;
+            function setup() {
+                createCanvas(windowWidth, windowHeight, WEBGL).position(0, 0).style("z-index", -1);
+                selectAll("a")[3].addClass("aqui");
+                selectAll(".miNombre").forEach((n) => {
+                    n.html("Andrés Martin");
+                });
+                img = loadImage("https://raw.githubusercontent.com/profesorfaco/front-2023-1/main/sesion_03/cat.jpg");
+                noStroke();
+            }
+
+            function draw() {
+                background(100);
+                windowResized();
+                
+                let locX = mouseX - height / 2;
+                let locY = mouseY - width / 2;
+                
+                ambientLight(100, 100, 80);
+                pointLight(255, 255, 255, locX, locY, windowWidth * 0.34);
+                
+                push();
+                rotateZ(frameCount * 0.01);
+                rotateX(frameCount * 0.01);
+                rotateY(frameCount * 0.01);
+                texture(img);
+                if (windowWidth * 0.34 < 400){
+                    box(windowWidth * 0.34);
+                } else {
+                    box(400);
+                }
+                pop();
+            }
+
+            function windowResized() {
+                resizeCanvas(windowWidth, windowHeight);
+            }
+        </script>
+    </body>
+</html>
